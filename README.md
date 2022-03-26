@@ -33,4 +33,5 @@ Unplug the usb cable, and preform a bootloader unlock, or reboot the device.
 Credits:
 
 Huge thanks to bkerler and everyone who helped make mtkclient, the core component in this app.
+
 Also a special thanks to warlockguitarman, who discovered the need to stall the boot sequence for mtkclient to connect.
