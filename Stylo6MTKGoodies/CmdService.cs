@@ -93,20 +93,69 @@ namespace Stylo6MTKGoodies
         
         private void _cmdWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e.Argument.ToString() == "payload")
+            object[] args = (object[])e.Argument;
+            if (args[0].ToString() == "payload")
             {
-                t = new CancellationTokenSource();
-
-                _logger.Log("Waiting for device!..." + Environment.NewLine);
-                _logger.Log("Please connect usb cable to device after it has been powered off." + Environment.NewLine);
-                _logger.Log("Do not press any hardware buttons!" + Environment.NewLine);
-
-                Task<int> spflashResponse = SPFlashTool("flash_tool.exe -i stallBrom.xml", 10000);
-
-                if (spflashResponse.Result == 1)
+                Task<int> spflashResponse = null;
+                if (args.Length > 1)
                 {
-                    _logger.Log("Processing!..." + Environment.NewLine + Environment.NewLine);
+                    if ((bool)args[1] == true)
+                    {
+                        t = new CancellationTokenSource();
 
+                        _logger.Log("Waiting for device!..." + Environment.NewLine);
+                        _logger.Log("Please connect usb cable to device after it has been powered off." + Environment.NewLine);
+                        _logger.Log("Do not press any hardware buttons!" + Environment.NewLine);
+
+                        spflashResponse = SPFlashTool("flash_tool.exe -i stallBrom.xml", 10000);
+                    }
+                }
+
+                if (spflashResponse != null)
+                {
+                    if (spflashResponse.Result == 1)
+                    {
+                        _logger.Log("Processing!..." + Environment.NewLine + Environment.NewLine);
+
+                        ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                        processStartInfo.FileName = "cmd.exe";
+                        processStartInfo.Arguments = "/c " + Application.StartupPath + @"\mtkclient\python3\python.exe " + Application.StartupPath + @"\mtkclient\mtk payload";
+                        processStartInfo.UseShellExecute = false;
+                        processStartInfo.RedirectStandardOutput = true;
+                        processStartInfo.RedirectStandardInput = true;
+                        processStartInfo.WorkingDirectory = Application.StartupPath + @"\mtkclient";
+                        processStartInfo.CreateNoWindow = true;
+
+                        _cmdProcess = Process.Start(processStartInfo);
+                        _cmdProcess.EnableRaisingEvents = true;
+                        _cmdProcess.OutputDataReceived += _cmdProcess_OutputDataReceived;
+                        _cmdProcess.ErrorDataReceived += _cmdProcess_ErrorDataReceived;
+                        _cmdProcess.BeginOutputReadLine();
+
+                        while (_cmdProcess.HasExited == false && _cmdWorker.CancellationPending == false)
+                        {
+                            if (payloadSent == true)
+                            {
+                                payloadSent = false;
+                                break;
+                            }
+                            Application.DoEvents();
+                        }
+
+                        e.Cancel = true;
+                        _cmdProcess.CancelOutputRead();
+                        _taskKiller.ExecuteCommand("python.exe");
+                        _cmdProcess?.Close();
+                        _cmdProcess = null;
+                        return;
+                    }
+                    else
+                    {
+                        _logger.Log(spflashResponse + "\n");
+                    }
+                }
+                else
+                {
                     ProcessStartInfo processStartInfo = new ProcessStartInfo();
                     processStartInfo.FileName = "cmd.exe";
                     processStartInfo.Arguments = "/c " + Application.StartupPath + @"\mtkclient\python3\python.exe " + Application.StartupPath + @"\mtkclient\mtk payload";
@@ -129,7 +178,7 @@ namespace Stylo6MTKGoodies
                             payloadSent = false;
                             break;
                         }
-                            Application.DoEvents();
+                        Application.DoEvents();
                     }
 
                     e.Cancel = true;
@@ -138,18 +187,14 @@ namespace Stylo6MTKGoodies
                     _cmdProcess?.Close();
                     _cmdProcess = null;
                     return;
-                }
-                else
-                {
-                    _logger.Log(spflashResponse + "\n");
-                }
+                }                
             }
             else
             {
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.FileName = "cmd.exe";
                 processStartInfo.WorkingDirectory = Application.StartupPath + @"\mtkclient";
-                processStartInfo.Arguments = "/c " + Application.StartupPath + @"\mtkclient\python3\python.exe mtk " + e.Argument.ToString();
+                processStartInfo.Arguments = "/c " + Application.StartupPath + @"\mtkclient\python3\python.exe mtk " + args[0].ToString();
                 processStartInfo.UseShellExecute = false;
                 processStartInfo.RedirectStandardOutput = true;
                 processStartInfo.RedirectStandardInput = true;
@@ -185,6 +230,20 @@ namespace Stylo6MTKGoodies
             }
         }
 
+        public void ExecuteCommand(string command, bool delay)
+        {
+            // Clears the log every time a new command is ran
+            _logger.Clear();
+
+            _cmdWorker?.Dispose();
+            _cmdWorker = new BackgroundWorker();
+            _cmdWorker.WorkerSupportsCancellation = true;
+            _cmdWorker.DoWork += _cmdWorker_DoWork;
+            _cmdWorker.RunWorkerCompleted += _cmdWorker_RunWorkerCompleted;
+
+            _cmdWorker.RunWorkerAsync(new object[] { command, delay });
+        }
+
         public void ExecuteCommand(string command)
         {
             // Clears the log every time a new command is ran
@@ -196,7 +255,7 @@ namespace Stylo6MTKGoodies
             _cmdWorker.DoWork += _cmdWorker_DoWork;
             _cmdWorker.RunWorkerCompleted += _cmdWorker_RunWorkerCompleted;
 
-            _cmdWorker.RunWorkerAsync(command);
+            _cmdWorker.RunWorkerAsync(new object[] { command } );
         }
 
         bool payloadSent = false;

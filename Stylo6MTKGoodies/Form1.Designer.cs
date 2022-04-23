@@ -45,6 +45,8 @@
             this.cancelBtn = new System.Windows.Forms.Button();
             this.rebootBtn = new System.Windows.Forms.Button();
             this.blUnlockBtn = new System.Windows.Forms.Button();
+            this.blLockBtn = new System.Windows.Forms.Button();
+            this.delaySPFBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appIcon1)).BeginInit();
             this.dragBar1.SuspendLayout();
@@ -196,9 +198,9 @@
             this.TitleLbl.ForeColor = System.Drawing.Color.Silver;
             this.TitleLbl.Location = new System.Drawing.Point(4, 8);
             this.TitleLbl.Name = "TitleLbl";
-            this.TitleLbl.Size = new System.Drawing.Size(134, 20);
+            this.TitleLbl.Size = new System.Drawing.Size(147, 20);
             this.TitleLbl.TabIndex = 0;
-            this.TitleLbl.Text = "LG Stylo 6 Goodies";
+            this.TitleLbl.Text = "Stylo MTK 6 Goodies";
             // 
             // cancelBtn
             // 
@@ -228,7 +230,7 @@
             // 
             this.blUnlockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.blUnlockBtn.ForeColor = System.Drawing.Color.Silver;
-            this.blUnlockBtn.Location = new System.Drawing.Point(179, 67);
+            this.blUnlockBtn.Location = new System.Drawing.Point(180, 67);
             this.blUnlockBtn.Name = "blUnlockBtn";
             this.blUnlockBtn.Size = new System.Drawing.Size(173, 44);
             this.blUnlockBtn.TabIndex = 2;
@@ -236,12 +238,40 @@
             this.blUnlockBtn.UseVisualStyleBackColor = false;
             this.blUnlockBtn.Click += new System.EventHandler(this.blUnlockBtn_Click);
             // 
+            // blLockBtn
+            // 
+            this.blLockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.blLockBtn.ForeColor = System.Drawing.Color.Silver;
+            this.blLockBtn.Location = new System.Drawing.Point(386, 67);
+            this.blLockBtn.Name = "blLockBtn";
+            this.blLockBtn.Size = new System.Drawing.Size(173, 44);
+            this.blLockBtn.TabIndex = 13;
+            this.blLockBtn.Text = "Bootloader Lock";
+            this.blLockBtn.UseVisualStyleBackColor = false;
+            this.blLockBtn.Click += new System.EventHandler(this.blLockBtn_Click);
+            // 
+            // delaySPFBox
+            // 
+            this.delaySPFBox.AutoSize = true;
+            this.delaySPFBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.delaySPFBox.Checked = true;
+            this.delaySPFBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.delaySPFBox.ForeColor = System.Drawing.Color.Silver;
+            this.delaySPFBox.Location = new System.Drawing.Point(213, 42);
+            this.delaySPFBox.Name = "delaySPFBox";
+            this.delaySPFBox.Size = new System.Drawing.Size(140, 17);
+            this.delaySPFBox.TabIndex = 14;
+            this.delaySPFBox.Text = "Delay with SP Flash tool";
+            this.delaySPFBox.UseVisualStyleBackColor = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(941, 600);
+            this.Controls.Add(this.delaySPFBox);
+            this.Controls.Add(this.blLockBtn);
             this.Controls.Add(this.rebootBtn);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.dragBar2);
@@ -286,6 +316,8 @@
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button rebootBtn;
         private System.Windows.Forms.Button blUnlockBtn;
+        private System.Windows.Forms.Button blLockBtn;
+        private System.Windows.Forms.CheckBox delaySPFBox;
     }
 }
 

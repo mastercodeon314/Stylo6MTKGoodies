@@ -26,12 +26,21 @@ namespace Stylo6MTKGoodies
             }
         }
 
+        public void ForceBrom(bool delay)
+        {
+            if (cmdService != null)
+            {
+                // python mtk payload
+                cmdService.ExecuteCommand("payload", delay);
+            }
+        }
+
         public void ForceBrom()
         {            
             if (cmdService != null)
             {
                 // python mtk payload
-                cmdService.ExecuteCommand("payload");
+                cmdService.ExecuteCommand("payload", true);
             }
         }
 

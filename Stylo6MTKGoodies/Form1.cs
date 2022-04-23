@@ -63,7 +63,7 @@ namespace Stylo6MTKGoodies
 
         private void forceBromBtn_Click(object sender, EventArgs e)
         {
-            stylo6.ForceBrom();
+            stylo6.ForceBrom(delaySPFBox.Checked);
             DisableAllCommandButtons();
         }
 
@@ -75,7 +75,7 @@ namespace Stylo6MTKGoodies
         private void blUnlockBtn_Click(object sender, EventArgs e)
         {
             stylo6.UnlockBootloader();
-            //DisableAllCommandButtons();
+            DisableAllCommandButtons();
         }
 
         private void rebootBtn_Click(object sender, EventArgs e)
@@ -87,6 +87,12 @@ namespace Stylo6MTKGoodies
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void blLockBtn_Click(object sender, EventArgs e)
+        {
+            stylo6.LockBootloader();
+            DisableAllCommandButtons();
         }
     }
 }
