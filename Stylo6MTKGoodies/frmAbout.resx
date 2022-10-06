@@ -117,6 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="infoBox.Text" xml:space="preserve">
+    <value>Stylo 6 MTK Goodies
+Discord contact: HatersGonnaHate#4497
+
+Github: https://github.com/mastercodeon314
+
+If you encounter any bugs, please take a screen recorded video of the bug being triggered and send that to me on the discord stated above.
+
+I am NOT responsible if you brick your device by trying this, but im pretty sure you already accept and know that :)</value>
+  </data>
   <data name="textBox1.Text" xml:space="preserve">
     <value>This program assumes you already have the proper drivers installed and configured for MTK Client.
 If you do not have the drivers installed, please close this app and install them. 

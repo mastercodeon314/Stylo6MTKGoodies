@@ -52,8 +52,7 @@
             this.infoBox.Name = "infoBox";
             this.infoBox.Size = new System.Drawing.Size(358, 285);
             this.infoBox.TabIndex = 10;
-            this.infoBox.Text = "Stylo 6 MTK Goodies\r\nDiscord contact: HatersGonnaHate#4497\r\n\r\nGithub: https://git" +
-    "hub.com/mastercodeon314";
+            this.infoBox.Text = resources.GetString("infoBox.Text");
             // 
             // label1
             // 

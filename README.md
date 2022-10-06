@@ -2,17 +2,13 @@
 
 This is a .NET wrapper around bkerler's [mtkclient](https://github.com/bkerler/mtkclient)
 specifically designed for the LG Stylo 6.
-
-This app currently supports forcing the stylo to brom mode, and bootloader unlocking the device. A carrier unlock feature is comming soon.
-
 Install:
 
 In order to use this tool, you must have the MTK Serial Port driver, UsbDk, and python >=3.8.
 Refer to https://github.com/bkerler/mtkclient#install for further instructions.
 
 
-The tool relies on a prepackaged setup that has mtkclient and SPFlash tool bundled together, i have a 7z hosted here:
-https://drive.google.com/file/d/1YLitsAizcz18Tl6qXJewmRRRT8p2kOJS/view?usp=drivesdk
+The tool relies on a prepackaged setup that has mtkclient and SPFlash tool bundled together, package included in release.
 
 Download that and extract its contents to a folder named mtkclient, this folder should reside alongside Stylo6MTKGoodies.exe.
 If you dowload the Release 7z from here or the github page, it will already come with this folder included.
