@@ -221,11 +221,32 @@ namespace Stylo6MTKGoodies.TitleBar
         protected override void OnClick(EventArgs e)
         {
             if (ButtonType == Type.Close)
-                this.FindForm()?.Close();
+            {
+                Form frm = this.FindForm();
+                if (!frm.Modal)
+                {
+                    if (frm.ShowInTaskbar)
+                    {
+                        frm?.Close();
+                    }
+                    else
+                    {
+                        frm?.Hide();
+                    }
+                }
+                else
+                {
+                    frm?.Hide();
+                }
+            }
             else if (ButtonType == Type.Maximize)
+            {
                 this.FindForm().WindowState = this.FindForm().WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
+            }
             else
+            {
                 this.FindForm().WindowState = FormWindowState.Minimized;
+            }
 
             base.OnClick(e);
         }

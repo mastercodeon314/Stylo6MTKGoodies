@@ -101,7 +101,7 @@ namespace Stylo6MTKGoodies
                 {
                     if ((bool)args[1] == true)
                     {
-                        t = new CancellationTokenSource();
+                        //
 
                         _logger.Log("Waiting for device!..." + Environment.NewLine);
                         _logger.Log("Please connect usb cable to device after it has been powered off." + Environment.NewLine);
@@ -115,6 +115,8 @@ namespace Stylo6MTKGoodies
                 {
                     if (spflashResponse.Result == 1)
                     {
+                        if (t.IsCancellationRequested) return;
+
                         _logger.Log("Processing!..." + Environment.NewLine + Environment.NewLine);
 
                         ProcessStartInfo processStartInfo = new ProcessStartInfo();
@@ -232,6 +234,8 @@ namespace Stylo6MTKGoodies
 
         public void ExecuteCommand(string command, bool delay)
         {
+            t = new CancellationTokenSource();
+
             // Clears the log every time a new command is ran
             _logger.Clear();
 

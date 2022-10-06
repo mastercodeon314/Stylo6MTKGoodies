@@ -81,6 +81,11 @@ namespace Stylo6MTKGoodies
             }
         }
 
+        public void CarrierUnlock()
+        {
+            ExecuteMTKCommand("e nvdata,nvram,protect1,protect2");
+        }
+
         public void ExecuteMTKCommand(string command)
         {
             if (cmdService != null)

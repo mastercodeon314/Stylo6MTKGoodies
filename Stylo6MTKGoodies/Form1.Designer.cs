@@ -47,6 +47,7 @@
             this.blUnlockBtn = new System.Windows.Forms.Button();
             this.blLockBtn = new System.Windows.Forms.Button();
             this.delaySPFBox = new System.Windows.Forms.CheckBox();
+            this.carrierUnlockBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appIcon1)).BeginInit();
             this.dragBar1.SuspendLayout();
@@ -71,11 +72,11 @@
             this.outputBox.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputBox.ForeColor = System.Drawing.Color.Silver;
             this.outputBox.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.outputBox.Location = new System.Drawing.Point(0, 117);
+            this.outputBox.Location = new System.Drawing.Point(0, 167);
             this.outputBox.Multiline = true;
             this.outputBox.Name = "outputBox";
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.outputBox.Size = new System.Drawing.Size(940, 480);
+            this.outputBox.Size = new System.Drawing.Size(940, 430);
             this.outputBox.TabIndex = 1;
             // 
             // menuStrip1
@@ -117,6 +118,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // dragBar2
             // 
@@ -242,7 +244,7 @@
             // 
             this.blLockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.blLockBtn.ForeColor = System.Drawing.Color.Silver;
-            this.blLockBtn.Location = new System.Drawing.Point(386, 67);
+            this.blLockBtn.Location = new System.Drawing.Point(383, 67);
             this.blLockBtn.Name = "blLockBtn";
             this.blLockBtn.Size = new System.Drawing.Size(173, 44);
             this.blLockBtn.TabIndex = 13;
@@ -264,12 +266,25 @@
             this.delaySPFBox.Text = "Delay with SP Flash tool";
             this.delaySPFBox.UseVisualStyleBackColor = false;
             // 
+            // carrierUnlockBtn
+            // 
+            this.carrierUnlockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.carrierUnlockBtn.ForeColor = System.Drawing.Color.Silver;
+            this.carrierUnlockBtn.Location = new System.Drawing.Point(383, 117);
+            this.carrierUnlockBtn.Name = "carrierUnlockBtn";
+            this.carrierUnlockBtn.Size = new System.Drawing.Size(173, 44);
+            this.carrierUnlockBtn.TabIndex = 15;
+            this.carrierUnlockBtn.Text = "Carrier Unlock";
+            this.carrierUnlockBtn.UseVisualStyleBackColor = false;
+            this.carrierUnlockBtn.Click += new System.EventHandler(this.carrierUnlockBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(941, 600);
+            this.Controls.Add(this.carrierUnlockBtn);
             this.Controls.Add(this.delaySPFBox);
             this.Controls.Add(this.blLockBtn);
             this.Controls.Add(this.rebootBtn);
@@ -287,6 +302,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -318,6 +334,7 @@
         private System.Windows.Forms.Button blUnlockBtn;
         private System.Windows.Forms.Button blLockBtn;
         private System.Windows.Forms.CheckBox delaySPFBox;
+        private System.Windows.Forms.Button carrierUnlockBtn;
     }
 }
 

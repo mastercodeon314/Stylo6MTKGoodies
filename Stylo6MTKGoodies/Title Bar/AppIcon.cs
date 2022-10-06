@@ -54,14 +54,16 @@ Description("The value used to scale down the icon"),
         private Point startPoint = new Point(0, 0); // also for the moving
         Form dragForm = null;
         private Image appIconImg = Stylo6MTKGoodies.Properties.Resources.icons8_application_window_100_inverted;
+
+        public void SetDragForm(Form form)
+        {
+            dragForm = form;
+        }
+
         public AppIcon()
         {
-            dragForm = MainForm.Instance;
             //SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             //BackColor = Color.Transparent;
-
-
-
 
             this.MouseDown += AmgAppLogo_MouseDown;
             this.MouseUp += AmgAppLogo_MouseUp;

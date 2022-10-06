@@ -16,7 +16,7 @@ namespace Stylo6MTKGoodies.TitleBar
         private Point startPoint = new Point(0, 0); // also for the moving
         Form dragForm = null;
 
-        public DragBar()
+        public void SetDragForm(Form form)
         {
             if (this.DesignMode == true)
             {
@@ -24,13 +24,13 @@ namespace Stylo6MTKGoodies.TitleBar
             }
             else
             {
-                if (MainForm.Instance != null)
-                {
-                    dragForm = MainForm.Instance;
-                    //this.BackColor = dragForm.BackColor;
-                }
+                dragForm = form;
+                //this.BackColor = dragForm.BackColor;
             }
+        }
 
+        public DragBar()
+        {
             this.MouseDown += AmgAppLogo_MouseDown;
             this.MouseUp += AmgAppLogo_MouseUp;
             this.MouseMove += AmgAppLogo_MouseMove;

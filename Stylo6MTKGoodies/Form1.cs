@@ -28,10 +28,19 @@ namespace Stylo6MTKGoodies
 
         Stylo6 stylo6;
 
+        frmAbout aboutFrm = new frmAbout();
+
         public MainForm()
         {
             Instance = this;
-            InitializeComponent();           
+            aboutFrm.ShowInTaskbar = false;
+            
+            InitializeComponent();
+
+            appIcon1.SetDragForm(this);
+            dragBar1.SetDragForm(this);
+            dragBar2.SetDragForm(this);
+
 
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
@@ -92,6 +101,20 @@ namespace Stylo6MTKGoodies
         private void blLockBtn_Click(object sender, EventArgs e)
         {
             stylo6.LockBootloader();
+            DisableAllCommandButtons();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!aboutFrm.Visible)
+            {
+                aboutFrm.Show(this);
+            }
+        }
+
+        private void carrierUnlockBtn_Click(object sender, EventArgs e)
+        {
+            stylo6.CarrierUnlock();
             DisableAllCommandButtons();
         }
     }
